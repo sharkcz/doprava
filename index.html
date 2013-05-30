@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <title>doprava</title>
+    <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
+    <script type="text/javascript" src="js/Ajax.js"></script>
+    <script type="text/javascript" src="js/Engine.js"></script>
+    <script type="text/javascript">
+        function init() {
+            var canvasSelector = 'canvas';
+            var engine = new Engine(canvasSelector);
+            engine.debug = true;
+            var vertexShader = engine.setVertexShaderUrl('shaders/vertex.gl');
+            var fragmentShader = engine.setFragmentShaderUrl('shaders/fragment.gl');
+            engine.useProgram(vertexShader, fragmentShader);
+        };
+        window.onload = init;
+    </script>
+</head>
+<body>
+
+<canvas></canvas>
