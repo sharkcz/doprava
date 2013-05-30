@@ -21,15 +21,7 @@ Engine.prototype.log = function(data, type) {
     }
 };
 Engine.prototype.logShader = function(data, shaderType) {
-    var type = undefined;
-    
-    for (var key in this.glTypes) {
-        if (this.glTypes[key] == shaderType) {
-            type = key;
-            break;
-        }
-    }
-    
+    var type = sharkodlak.helper.findProperty(this.glTypes, shaderType);
     this.log(data, type);
 };
 Engine.prototype.setFragmentShaderUrl = function(url) {
@@ -38,19 +30,19 @@ Engine.prototype.setFragmentShaderUrl = function(url) {
 Engine.prototype.setShaderUrl = function(url, shaderType) {
     var gl = this.gl;
     var engine = this;
+    var shader = gl.createShader(shaderType);
     var onload = function(xhrEvent) {
-        var shader = gl.createShader(shaderType);
         gl.shaderSource(shader, this.responseText);
         gl.compileShader(shader);
         engine.logShader(this.responseText, shaderType);
     }
     this.glUrl(url, onload);
-    return onload;
+    return shader;
 };
 Engine.prototype.setVertexShaderUrl = function(url) {
     return this.setShaderUrl(url, this.gl.VERTEX_SHADER);
 };
-Engine.prototype.useProgram(vertexShader, fragmentShader) {
+Engine.prototype.useProgram = function(vertexShader, fragmentShader) {
     var gl = this.gl;
     var program = gl.createProgram();
     //gl.attachShader(program, vertexShader);
