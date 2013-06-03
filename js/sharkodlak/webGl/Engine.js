@@ -1,16 +1,23 @@
 var sharkodlak = sharkodlak || {};
 sharkodlak.webGl = sharkodlak.webGl || {};
 
+
 sharkodlak.webGl.Engine = function(canvasSelector) {
     var canvas = document.querySelector(canvasSelector);
-    this.debug = false;
     this.gl = canvas.getContext('experimental-webgl');
-    this.glTypes = {
-        FRAGMENT_SHADER: this.gl.FRAGMENT_SHADER,
-        VERTEX_SHADER: this.gl.VERTEX_SHADER
-    };
 }
 
+
+// Predefined properties
+sharkodlak.webGl.Engine.prototype.debug = false;
+// @see http://www.khronos.org/registry/webgl/specs/1.0/
+sharkodlak.webGl.Engine.prototype.glTypes = {
+    FRAGMENT_SHADER: 0x8B30,
+    VERTEX_SHADER: 0x8B31
+};
+
+
+// Methods
 sharkodlak.webGl.Engine.prototype.glUrl = function(url, onload, onerror) {
     var settings = {
         onload: onload,
@@ -52,4 +59,4 @@ sharkodlak.webGl.Engine.prototype.useProgram = function(vertexShader, fragmentSh
     //gl.attachShader(program, fragmentShader);
     //gl.linkProgram(program);
     //gl.useProgram(program);
-}
+};
