@@ -1,4 +1,6 @@
-function Ajax(url, settings) {
+var sharkodlak = sharkodlak || {};
+
+sharkodlak.ajax = function(url, settings) {
     if (typeof url === 'object') {
         settings = url;
         url = settings.url;

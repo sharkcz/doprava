@@ -1,4 +1,7 @@
-function Engine(canvasSelector) {
+var sharkodlak = sharkodlak || {};
+sharkodlak.webGl = sharkodlak.webGl || {};
+
+sharkodlak.webGl.Engine = function(canvasSelector) {
     var canvas = document.querySelector(canvasSelector);
     this.debug = false;
     this.gl = canvas.getContext('experimental-webgl');
@@ -8,26 +11,26 @@ function Engine(canvasSelector) {
     };
 }
 
-Engine.prototype.glUrl = function(url, onload, onerror) {
+sharkodlak.webGl.Engine.prototype.glUrl = function(url, onload, onerror) {
     var settings = {
         onload: onload,
         onerror: onerror || console.log
     };
-    new Ajax(url, settings);
+    sharkodlak.ajax(url, settings);
 };
-Engine.prototype.log = function(data, type) {
+sharkodlak.webGl.Engine.prototype.log = function(data, type) {
     if (this.debug) {
-        console.log(data + '\r\ntype:', type);
+        console.debug(data + '\r\n%ctype: %s', 'color: blue', type);
     }
 };
-Engine.prototype.logShader = function(data, shaderType) {
+sharkodlak.webGl.Engine.prototype.logShader = function(data, shaderType) {
     var type = sharkodlak.helper.findProperty(this.glTypes, shaderType);
     this.log(data, type);
 };
-Engine.prototype.setFragmentShaderUrl = function(url) {
+sharkodlak.webGl.Engine.prototype.setFragmentShaderUrl = function(url) {
     return this.setShaderUrl(url, this.gl.FRAGMENT_SHADER);
 };
-Engine.prototype.setShaderUrl = function(url, shaderType) {
+sharkodlak.webGl.Engine.prototype.setShaderUrl = function(url, shaderType) {
     var gl = this.gl;
     var engine = this;
     var shader = gl.createShader(shaderType);
@@ -39,10 +42,10 @@ Engine.prototype.setShaderUrl = function(url, shaderType) {
     this.glUrl(url, onload);
     return shader;
 };
-Engine.prototype.setVertexShaderUrl = function(url) {
+sharkodlak.webGl.Engine.prototype.setVertexShaderUrl = function(url) {
     return this.setShaderUrl(url, this.gl.VERTEX_SHADER);
 };
-Engine.prototype.useProgram = function(vertexShader, fragmentShader) {
+sharkodlak.webGl.Engine.prototype.useProgram = function(vertexShader, fragmentShader) {
     var gl = this.gl;
     var program = gl.createProgram();
     //gl.attachShader(program, vertexShader);

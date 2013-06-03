@@ -4,19 +4,18 @@
     <meta charset="utf-8">
     <title>doprava</title>
     <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
-    <script type="text/javascript" src="js/helper.js"></script>
-    <script type="text/javascript" src="js/Ajax.js"></script>
-    <script type="text/javascript" src="js/Engine.js"></script>
+    <script type="text/javascript" src="js/sharkodlak/ajax.js"></script>
+    <script type="text/javascript" src="js/sharkodlak/helper.js"></script>
+    <script type="text/javascript" src="js/sharkodlak/webGl/Engine.js"></script>
     <script type="text/javascript">
-        function init() {
+        window.onload = function() {
             var canvasSelector = 'canvas';
-            var engine = new Engine(canvasSelector);
-            engine.debug = true;
-            var vertexShader = engine.setVertexShaderUrl('shaders/vertex.gl');
-            var fragmentShader = engine.setFragmentShaderUrl('shaders/fragment.gl');
-            engine.useProgram(vertexShader, fragmentShader);
-        };
-        window.onload = init;
+            var glEngine = new sharkodlak.webGl.Engine(canvasSelector);
+            glEngine.debug = true;
+            glEngine.setVertexShaderUrl('shaders/vertex.gl');
+            glEngine.setFragmentShaderUrl('shaders/fragment.gl');
+            glEngine.useProgram();
+        }
     </script>
 </head>
 <body>
