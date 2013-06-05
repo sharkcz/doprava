@@ -1,3 +1,4 @@
+'use strict'; // JavaScript strict mode
 var sharkodlak = sharkodlak || {};
 sharkodlak.webGl = sharkodlak.webGl || {};
 
@@ -33,7 +34,7 @@ sharkodlak.webGl.Engine.prototype.glUrl = function(url, onload, onerror) {
 };
 sharkodlak.webGl.Engine.prototype.log = function(data, type) {
     if (this.debug) {
-        console.debug(data + '\r\n%ctype: %s', 'color: blue', type);
+        console.debug('%c%s:\r\n%c%s', 'color: blue; font-weight: bold', type, 'color: inherit; font-weight: inherit', data);
     }
 };
 sharkodlak.webGl.Engine.prototype.logShader = function(data, shaderType) {

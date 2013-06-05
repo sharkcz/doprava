@@ -1,3 +1,4 @@
+'use strict'; // JavaScript strict mode
 var sharkodlak = sharkodlak || {};
 
 sharkodlak.helper = sharkodlak.helper || {
