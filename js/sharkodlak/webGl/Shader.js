@@ -3,9 +3,18 @@ var sharkodlak = sharkodlak || {};
 sharkodlak.webGl = sharkodlak.webGl || {};
 
 
-sharkodlak.webGl.Shader = function(source) {
-    this.source = source;
-}
+sharkodlak.webGl.Shader = sharkodlak.extends(
+    function(source) {
+        sharkodlak.patterns.Listenable.call(this);
+        this.source = source;
+    },
+    sharkodlak.patterns.Listenable
+);
+
+
+sharkodlak.webGl.Shader.listenerUpdate = function(listener) {
+    listener.update();
+};
 
 
 sharkodlak.webGl.Shader.prototype.getShader = function(engine) {
@@ -29,6 +38,7 @@ sharkodlak.webGl.Shader.prototype.setSourceUrl = function(url) {
     var shader = this;
     var onload = function(xhrEvent) {
         shader.source = this.responseText;
+        shader.listeners.forEach(sharkodlak.webGl.Shader.listenerUpdate);
     }
     return sharkodlak.webGl.Engine.glUrl(url, onload);
 };

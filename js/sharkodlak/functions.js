@@ -43,6 +43,7 @@ sharkodlak.extends = function(child, parent) {
     child.prototype = new F;
     child.prototype.constructor = child;
     child._superClass = parent.prototype; // Parent class methods available to child
+    return child;
 };
 
 sharkodlak.findProperty = function(haystack, needle) {
