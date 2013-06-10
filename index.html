@@ -23,17 +23,24 @@
             var vertexShader = new sharkodlak.webGl.VertexShader();
             var main = function(engine, program) {
                 var gl = engine.gl;
-                var posLoc = gl.getAttribLocation(program, 'pos');
+                var positionLocation = gl.getAttribLocation(program, 'position');
                 var posBuffer = gl.createBuffer();
-                var pointPosition = new Float32Array([0.5, 0.5]);
+                var pointsCoordinates = [
+                    0, 0,
+                    0.5, 0.5,
+                    -0.75, 0,
+                    0.5, -0.5
+                ];
+                pointsCoordinates.dimensions = 2;
+                var pointPosition = new Float32Array(pointsCoordinates);
                 
-                gl.enableVertexAttribArray(posLoc);
+                gl.enableVertexAttribArray(positionLocation);
                 gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
                 gl.bufferData(gl.ARRAY_BUFFER, pointPosition, gl.STATIC_DRAW);
-                gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+                gl.vertexAttribPointer(positionLocation, pointsCoordinates.dimensions, gl.FLOAT, false, 0, 0);
                 gl.clearColor(0.0, 0.0, 0.0, 1.0);
                 gl.clear(gl.COLOR_BUFFER_BIT);
-                gl.drawArrays(gl.POINTS, 0, 1);
+                gl.drawArrays(gl.POINTS, 0, pointsCoordinates.length / pointsCoordinates.dimensions);
             };
             
             fragmentShader.setSourceUrl('shaders/fragment.gl');

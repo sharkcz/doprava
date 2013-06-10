@@ -31,6 +31,10 @@ sharkodlak.webGl.Program.prototype.run = function() {
         gl.linkProgram(program);
         gl.useProgram(program);
         
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            throw new Error(gl.getProgramInfoLog(program));
+        }
+        
         this.callback(engine, program);
     }
 };

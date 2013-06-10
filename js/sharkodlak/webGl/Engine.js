@@ -7,6 +7,10 @@ sharkodlak.webGl.Engine = function(canvasSelector) {
     var canvas = document.querySelector(canvasSelector);
     this.gl = canvas.getContext(sharkodlak.webGl.Engine.CONTEXT);
     this.program;
+    
+    if (!this.gl) {
+        throw new Error('No WebGL found, check your browser WebGL support.');
+    }
 }
 
 

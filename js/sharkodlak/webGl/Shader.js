@@ -24,6 +24,11 @@ sharkodlak.webGl.Shader.prototype.getShader = function(engine) {
     gl.shaderSource(shader, this.source);
     gl.compileShader(shader);
     this.log(engine, type);
+    
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        throw new Error(gl.getShaderInfoLog(shader));
+    }
+    
     return shader;
 };
 
