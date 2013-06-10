@@ -35,7 +35,7 @@ sharkodlak.webGl.Program.prototype.run = function() {
             throw new Error(gl.getProgramInfoLog(program));
         }
         
-        this.callback(engine, program);
+        this.callback(gl, program);
     }
 };
 
