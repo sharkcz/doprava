@@ -55,3 +55,5 @@ sharkodlak.findProperty = function(haystack, needle) {
     
     return undefined;
 };
+
+sharkodlak.nullCallback = function() {};

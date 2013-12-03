@@ -20,13 +20,12 @@
         
         window.onload = function() {
             var canvasSelector = 'canvas';
-            var glEngine = new sharkodlak.webGl.Engine(canvasSelector);
+            var glEngine = new sharkodlak.webGl.Engine(canvasSelector, console.debug);
             var fragmentShader = new sharkodlak.webGl.FragmentShader();
             var vertexShader = new sharkodlak.webGl.VertexShader();
             
             fragmentShader.setSourceUrl('shaders/fragment.gl');
             vertexShader.setSourceUrl('shaders/vertex.gl');
-            glEngine.debug = true;
             glEngine.setProgram(fragmentShader, vertexShader, main);
         }
     </script>

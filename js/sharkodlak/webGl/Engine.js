@@ -3,8 +3,9 @@ var sharkodlak = sharkodlak || {};
 sharkodlak.webGl = sharkodlak.webGl || {};
 
 
-sharkodlak.webGl.Engine = function(canvasSelector) {
+sharkodlak.webGl.Engine = function(canvasSelector, debug) {
     var canvas = document.querySelector(canvasSelector);
+    this.debug = debug || sharkodlak.nullCallback;
     this.gl = canvas.getContext(sharkodlak.webGl.Engine.CONTEXT);
     this.program;
     
@@ -34,15 +35,9 @@ sharkodlak.webGl.Engine.glUrl = function(url, onload, onerror) {
 };
 
 
-// Default properties
-sharkodlak.webGl.Engine.prototype.debug = false;
-
-
 // Methods
 sharkodlak.webGl.Engine.prototype.log = function(data, type) {
-    if (this.debug) {
-        console.debug('%c%s:\r\n%c%s', 'color: blue; font-weight: bold', type, 'color: inherit; font-weight: inherit', data);
-    }
+    this.debug('%c%s:\r\n%c%s', 'color: blue; font-weight: bold', type, 'color: inherit; font-weight: inherit', data);
 };
 sharkodlak.webGl.Engine.prototype.setProgram = function(fragmentShader, vertexShader, callback) {
     this.program = new sharkodlak.webGl.Program(this, fragmentShader, vertexShader, callback);
